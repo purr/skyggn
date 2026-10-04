@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <rect x="3.2" y="4.6" width="17.6" height="14.8" rx="3" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="9" cy="9.6" r="1.7" fill="#ffffff"/>
+  <!-- the hills reach into the frame's line, so no gap shows between them; the thin round outline
+       softens their peaks like the other symbols' corners -->
+  <path d="M4 18.6 9.6 12.9l3.2 3.2 2.4-2.4 4.9 4.9Z" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
+</svg>

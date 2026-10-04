@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- the settings app's texts in german, with the same names as en-US/Resources.resw. -->
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LanguageTag" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="NavGeneral.Content" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="NavThumbnails.Content" xml:space="preserve">
+    <value>Miniaturansichten</value>
+  </data>
+  <data name="NavFileTypes.Content" xml:space="preserve">
+    <value>Dateitypen</value>
+  </data>
+  <data name="NavAbout.Content" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ErrorBar.Title" xml:space="preserve">
+    <value>Etwas ist schiefgegangen</value>
+  </data>
+  <data name="AdminShield.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ändert dies für alle Benutzer dieses PCs</value>
+  </data>
+  <data name="GeneralTitle.Text" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="EnabledCard.Header" xml:space="preserve">
+    <value>Miniaturansichten von skyggn</value>
+  </data>
+  <data name="EnabledCard.Description" xml:space="preserve">
+    <value>Zeigt im Datei-Explorer Bilder und Details zu Ihren Videos, Songs, Fotos, Comics und Dokumenten. Ausschalten stellt alles wieder so her, wie Windows es hatte.</value>
+  </data>
+  <data name="RefreshCard.Header" xml:space="preserve">
+    <value>Miniaturansichten erneuern</value>
+  </data>
+  <data name="RefreshCard.Description" xml:space="preserve">
+    <value>Windows merkt sich Miniaturansichten, die es schon erstellt hat. Erneuern Sie sie, damit jede Datei eine neue mit Ihren aktuellen Einstellungen bekommt. Der Datei-Explorer schließt sich dafür kurz und kommt wieder.</value>
+  </data>
+  <data name="RefreshButton.Content" xml:space="preserve">
+    <value>Erneuern</value>
+  </data>
+  <data name="AppIconCard.Header" xml:space="preserve">
+    <value>App-Symbol auf Miniaturansichten</value>
+  </data>
+  <data name="AppIconCard.Description" xml:space="preserve">
+    <value>Windows kann auf die Miniaturansichten anderer Dateien, etwa von Dokumenten, ein kleines App-Symbol zeichnen. Die Miniaturansichten von skyggn bekommen es nie.</value>
+  </data>
+  <data name="RepairCard.Header" xml:space="preserve">
+    <value>Defekte Miniaturansicht-Einträge</value>
+  </data>
+  <data name="RepairButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Reparieren</value>
+  </data>
+  <data name="RepairText.Text" xml:space="preserve">
+    <value>Reparieren</value>
+  </data>
+  <data name="LanguageCard.Header" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="LanguageWindows.Content" xml:space="preserve">
+    <value>Wie Windows</value>
+  </data>
+  <data name="RestartButton.Content" xml:space="preserve">
+    <value>skyggn neu starten</value>
+  </data>
+  <data name="StatusOnTitle" xml:space="preserve">
+    <value>skyggn ist an</value>
+  </data>
+  <data name="StatusOnMessage" xml:space="preserve">
+    <value>Es erstellt Miniaturansichten für {0} Dateitypen.</value>
+  </data>
+  <data name="StatusOnMessageUser" xml:space="preserve">
+    <value>Es erstellt Miniaturansichten für {0} Dateitypen, nur für Ihr Konto.</value>
+  </data>
+  <data name="StatusOffTitle" xml:space="preserve">
+    <value>skyggn ist aus</value>
+  </data>
+  <data name="StatusOffMessage" xml:space="preserve">
+    <value>Windows erstellt Miniaturansichten nur für die Formate, die es kennt.</value>
+  </data>
+  <data name="RepairDescriptionOne" xml:space="preserve">
+    <value>1 Dateityp verweist auf ein Miniaturansicht-Programm, das nicht mehr installiert ist, daher zeigen diese Dateien gar keine Miniaturansichten. Reparieren entfernt die Reste.</value>
+  </data>
+  <data name="RepairDescriptionMany" xml:space="preserve">
+    <value>{0} Dateitypen verweisen auf ein Miniaturansicht-Programm, das nicht mehr installiert ist, daher zeigen diese Dateien gar keine Miniaturansichten. Reparieren entfernt die Reste.</value>
+  </data>
+  <data name="RefreshDialogTitle" xml:space="preserve">
+    <value>Miniaturansichten erneuern?</value>
+  </data>
+  <data name="RefreshDialogContent" xml:space="preserve">
+    <value>Der Datei-Explorer schließt sich kurz und öffnet sich mit seinen Fenstern wieder. Jede Miniaturansicht, auch die von Fotos, wird beim Durchsuchen neu erstellt.</value>
+  </data>
+  <data name="RefreshDialogRefresh" xml:space="preserve">
+    <value>Erneuern</value>
+  </data>
+  <data name="DialogCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ThumbnailsTitle.Text" xml:space="preserve">
+    <value>Miniaturansichten</value>
+  </data>
+  <data name="PreviewExpander.Header" xml:space="preserve">
+    <value>Vorschau</value>
+  </data>
+  <data name="PreviewExpander.Description" xml:space="preserve">
+    <value>So sehen Miniaturansichten mit den Einstellungen unten aus, an einem Video und an einem Song ohne Cover. Wählen Sie eine Datei, um auch eine eigene zu sehen.</value>
+  </data>
+  <data name="ChooseButton.Content" xml:space="preserve">
+    <value>Datei auswählen…</value>
+  </data>
+  <data name="PreviewMaking" xml:space="preserve">
+    <value>Miniaturansicht wird erstellt…</value>
+  </data>
+  <data name="PreviewFailed" xml:space="preserve">
+    <value>Keine Miniaturansicht: {0}</value>
+  </data>
+  <data name="LookHeader.Text" xml:space="preserve">
+    <value>Aussehen</value>
+  </data>
+  <data name="BadgeCard.Header" xml:space="preserve">
+    <value>Badge</value>
+  </data>
+  <data name="BadgeNone.Content" xml:space="preserve">
+    <value>Keins</value>
+  </data>
+  <data name="BadgeFrosted.Content" xml:space="preserve">
+    <value>Milchglas</value>
+  </data>
+  <data name="BadgeTinted.Content" xml:space="preserve">
+    <value>In der Farbe der Dateiart</value>
+  </data>
+  <data name="BadgeLabelled.Content" xml:space="preserve">
+    <value>Mit dem Dateityp (MKV, MP3…)</value>
+  </data>
+  <data name="BadgeCornerCard.Header" xml:space="preserve">
+    <value>Position des Badges</value>
+  </data>
+  <data name="CornerBottomRight.Content" xml:space="preserve">
+    <value>Unten rechts</value>
+  </data>
+  <data name="CornerBottomLeft.Content" xml:space="preserve">
+    <value>Unten links</value>
+  </data>
+  <data name="CornerTopRight.Content" xml:space="preserve">
+    <value>Oben rechts</value>
+  </data>
+  <data name="CornerTopLeft.Content" xml:space="preserve">
+    <value>Oben links</value>
+  </data>
+  <data name="BadgeSizeCard.Header" xml:space="preserve">
+    <value>Größe des Badges</value>
+  </data>
+  <data name="PlaceholderCard.Header" xml:space="preserve">
+    <value>Dateien ohne Bild</value>
+  </data>
+  <data name="PlaceholderNone.Content" xml:space="preserve">
+    <value>Das übliche Symbol von Windows</value>
+  </data>
+  <data name="PlaceholderKind.Content" xml:space="preserve">
+    <value>Kachel in der Farbe der Dateiart</value>
+  </data>
+  <data name="PlaceholderPerFile.Content" xml:space="preserve">
+    <value>Kachel in der Farbe ihres Inhalts (Kopien gleich)</value>
+  </data>
+  <data name="VideosHeader.Text" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="PositionCard.Header" xml:space="preserve">
+    <value>Wo das Bild entnommen wird</value>
+  </data>
+  <data name="BlackFramesCard.Header" xml:space="preserve">
+    <value>Leere Bilder überspringen</value>
+  </data>
+  <data name="CoverArtCard.Header" xml:space="preserve">
+    <value>Titelbild des Videos verwenden</value>
+  </data>
+  <data name="PerformanceHeader.Text" xml:space="preserve">
+    <value>Leistung</value>
+  </data>
+  <data name="LowImpactCard.Header" xml:space="preserve">
+    <value>Schonender Modus</value>
+  </data>
+  <data name="TimeLimitCard.Header" xml:space="preserve">
+    <value>Zeitlimit pro Datei</value>
+  </data>
+  <data name="SecondsText.Text" xml:space="preserve">
+    <value>Sekunden</value>
+  </data>
+  <data name="FileTypesTitle.Text" xml:space="preserve">
+    <value>Dateitypen</value>
+  </data>
+  <data name="FileTypesIntro.Text" xml:space="preserve">
+    <value>Wählen Sie, welche Dateien ihre Bilder von skyggn bekommen. Ein Typ, den Sie ausschalten, wird wieder so angezeigt, wie Windows es tut.</value>
+  </data>
+  <data name="OffBar.Title" xml:space="preserve">
+    <value>skyggn ist aus</value>
+  </data>
+  <data name="OffBar.Message" xml:space="preserve">
+    <value>Schalten Sie es auf der Seite „Allgemein“ ein, um Dateitypen auszuwählen.</value>
+  </data>
+  <data name="AllButton.Content" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="RecommendedButton.Content" xml:space="preserve">
+    <value>Empfohlen</value>
+  </data>
+  <data name="NoneButton.Content" xml:space="preserve">
+    <value>Keine</value>
+  </data>
+  <data name="DiscardButton.Content" xml:space="preserve">
+    <value>Verwerfen</value>
+  </data>
+  <data name="ApplyButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Übernehmen</value>
+  </data>
+  <data name="ApplyText.Text" xml:space="preserve">
+    <value>Übernehmen</value>
+  </data>
+  <data name="PendingOne" xml:space="preserve">
+    <value>1 Änderung</value>
+  </data>
+  <data name="PendingMany" xml:space="preserve">
+    <value>{0} Änderungen</value>
+  </data>
+  <data name="GroupVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="GroupAudio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="GroupImage" xml:space="preserve">
+    <value>Bilder</value>
+  </data>
+  <data name="GroupRaw" xml:space="preserve">
+    <value>Kamera-RAW</value>
+  </data>
+  <data name="GroupBook" xml:space="preserve">
+    <value>Comics und E-Books</value>
+  </data>
+  <data name="GroupVideoDescription" xml:space="preserve">
+    <value>Ein Bild aus dem Video oder sein Titelbild</value>
+  </data>
+  <data name="GroupAudioDescription" xml:space="preserve">
+    <value>Das in der Datei enthaltene Album-Cover</value>
+  </data>
+  <data name="GroupImageDescription" xml:space="preserve">
+    <value>Das Bild selbst, auch HEIC, AVIF und JPEG XL, und die Vorschau in Illustrator- und EPS-Dateien</value>
+  </data>
+  <data name="GroupRawDescription" xml:space="preserve">
+    <value>Die Vorschau der Kamera oder das aus der Datei entwickelte Foto</value>
+  </data>
+  <data name="GroupBookDescription" xml:space="preserve">
+    <value>Das Cover: die erste Seite eines Comics, das Titelbild eines E-Books</value>
+  </data>
+  <data name="GroupSummary" xml:space="preserve">
+    <value>{0} von {1} an</value>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="AppCard.Description" xml:space="preserve">
+    <value>Miniaturansichten und Details für jedes Video-, Audio-, Bild-, Kamera-RAW-, Comic- und Dokumentformat.</value>
+  </data>
+  <data name="VersionText" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="LicenseCard.Header" xml:space="preserve">
+    <value>Lizenz</value>
+  </data>
+  <data name="LicenseCard.Description" xml:space="preserve">
+    <value>Freie Software unter der GNU General Public License, Version 3 oder neuer.</value>
+  </data>
+  <data name="LicensesButton.Content" xml:space="preserve">
+    <value>Lizenzdateien öffnen</value>
+  </data>
+  <data name="CreditsHeader.Text" xml:space="preserve">
+    <value>Danksagungen</value>
+  </data>
+  <data name="FFmpegThumbnailsCard.Header" xml:space="preserve">
+    <value>FFmpegThumbnails von megakraken</value>
+  </data>
+  <data name="FFmpegThumbnailsCard.Description" xml:space="preserve">
+    <value>Zeigte, wie man den Dateistrom von Windows für Explorer-Miniaturansichten an FFmpeg übergibt.</value>
+  </data>
+  <data name="IcarosCard.Header" xml:space="preserve">
+    <value>Icaros von Xanashi</value>
+  </data>
+  <data name="IcarosCard.Description" xml:space="preserve">
+    <value>Gibt dem Explorer seit Jahren FFmpeg-Miniaturansichten, als Freeware. skyggn ist eine quelloffene Alternative dazu.</value>
+  </data>
+  <data name="RecipeCard.Header" xml:space="preserve">
+    <value>Microsofts Beispiel „Recipe Thumbnail Provider“</value>
+  </data>
+  <data name="RecipeCard.Description" xml:space="preserve">
+    <value>Das Muster, auf dem jeder Miniaturansicht-Anbieter aufbaut, auch dieser.</value>
+  </data>
+  <data name="FFmpegCard.Description" xml:space="preserve">
+    <value>Dekodiert Videos, Audio und Bilder. LGPL 3.0.</value>
+  </data>
+  <data name="LibRawCard.Description" xml:space="preserve">
+    <value>Liest Kamera-RAW-Dateien. LGPL 2.1.</value>
+  </data>
+  <data name="ArchiveCard.Header" xml:space="preserve">
+    <value>libarchive, zlib und xz</value>
+  </data>
+  <data name="ArchiveCard.Description" xml:space="preserve">
+    <value>Öffnen Comics und E-Books. BSD-, zlib- und 0BSD-Lizenz.</value>
+  </data>
+  <data name="ToolkitCard.Header" xml:space="preserve">
+    <value>Windows Implementation Library und Windows Community Toolkit</value>
+  </data>
+  <data name="ToolkitCard.Description" xml:space="preserve">
+    <value>Halten den Windows-Code kurz und lassen diese App wie Windows aussehen. MIT.</value>
+  </data>
+  <data name="EngineMissing" xml:space="preserve">
+    <value>skyggn-engine.dll fehlt neben skyggn.exe. Installieren Sie skyggn neu, um das zu beheben.</value>
+  </data>
+  <data name="Crashed" xml:space="preserve">
+    <value>skyggn wurde wegen eines Fehlers beendet:
+{0}
+
+Die Einzelheiten stehen in {1}.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>{0} fehlgeschlagen: {1}</value>
+  </data>
+  <data name="ActionSaving" xml:space="preserve">
+    <value>Speichern von {0}</value>
+  </data>
+  <data name="ActionThumbnail" xml:space="preserve">
+    <value>Miniaturansicht von {0}</value>
+  </data>
+  <data name="ActionInstall" xml:space="preserve">
+    <value>Einschalten von skyggn</value>
+  </data>
+  <data name="ActionRegister" xml:space="preserve">
+    <value>Registrieren von skyggn</value>
+  </data>
+  <data name="ActionUnregister" xml:space="preserve">
+    <value>Abmelden von skyggn</value>
+  </data>
+  <data name="ActionTypeOn" xml:space="preserve">
+    <value>Einschalten von {0}</value>
+  </data>
+  <data name="ActionTypeOff" xml:space="preserve">
+    <value>Ausschalten von {0}</value>
+  </data>
+  <data name="ActionRepair" xml:space="preserve">
+    <value>Reparieren der Miniaturansicht-Einträge</value>
+  </data>
+  <data name="ActionCountDead" xml:space="preserve">
+    <value>Suche nach defekten Miniaturansicht-Einträgen</value>
+  </data>
+  <data name="ControlNotStarted" xml:space="preserve">
+    <value>skyggnctl {0} wurde nicht gestartet</value>
+  </data>
+  <data name="ControlFailed" xml:space="preserve">
+    <value>skyggnctl {0} ist fehlgeschlagen (Exitcode {1})</value>
+  </data>
+  <data name="CacheSession" xml:space="preserve">
+    <value>Starten einer Restart-Manager-Sitzung</value>
+  </data>
+  <data name="CacheRegister" xml:space="preserve">
+    <value>Anmelden der Miniaturansicht-Cachedateien</value>
+  </data>
+  <data name="CacheClose" xml:space="preserve">
+    <value>Schließen des Datei-Explorers</value>
+  </data>
+  <data name="CacheRestart" xml:space="preserve">
+    <value>Neustart des Datei-Explorers</value>
+  </data>
+  <data name="CacheInUse" xml:space="preserve">
+    <value>Diese Miniaturansicht-Cachedateien waren noch in Benutzung: {0}</value>
+  </data>
+  <data name="CacheList" xml:space="preserve">
+    <value>Suchen der Programme, die den Miniaturansicht-Cache verwenden</value>
+  </data>
+  <data name="CacheHeldBy" xml:space="preserve">
+    <value>Schließen Sie zuerst {0} und erneuern Sie dann noch einmal. Es verwendet den Miniaturansicht-Cache ebenfalls, und es für Sie zu schließen, könnte ungespeicherte Arbeit verlieren.</value>
+  </data>
+  <data name="PreviewSampleVideo" xml:space="preserve">
+    <value>Beispielvideo</value>
+  </data>
+  <data name="PreviewSampleSong" xml:space="preserve">
+    <value>Beispielsong ohne Cover</value>
+  </data>
+  <data name="RefreshBar.Title" xml:space="preserve">
+    <value>Der Datei-Explorer zeigt noch die alten Miniaturansichten</value>
+  </data>
+  <data name="RefreshBar.Message" xml:space="preserve">
+    <value>Windows behält die Miniaturansichten, die es schon erstellt hat. Erneuern Sie sie, damit jede Datei Ihre Änderungen zeigt.</value>
+  </data>
+  <data name="RefreshNowButton.Content" xml:space="preserve">
+    <value>Jetzt erneuern</value>
+  </data>
+  <data name="GroupDocument" xml:space="preserve">
+    <value>Dokumente</value>
+  </data>
+  <data name="GroupDocumentDescription" xml:space="preserve">
+    <value>Die erste Seite einer PDF oder eines InDesign-Layouts oder die Vorschau, die LibreOffice und OpenOffice in ihren Dateien speichern</value>
+  </data>
+  <data name="SystemDetailsCard.Header" xml:space="preserve">
+    <value>Details für MKV und WebM</value>
+  </data>
+  <data name="SystemDetailsCard.Description" xml:space="preserve">
+    <value>Windows behält die Details von MKV- und WebM-Dateien seinem eigenen Programm vor, das kaum mehr als die Länge zeigt. Schalten Sie dies ein, um stattdessen die von skyggn zu sehen: Bildgröße, Codecs, Audio- und Untertitelspuren, Kapitel. Dafür werden Einträge beiseitegelegt, die Windows schützt; Ausschalten stellt sie wieder her, und ein Windows-Update kann sie ebenfalls wiederherstellen.</value>
+  </data>
+</root>

@@ -1,0 +1,83 @@
+<Page
+    x:Class="Skyggn.Pages.GeneralPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    Loaded="OnLoaded">
+
+    <ScrollViewer>
+        <StackPanel Padding="{StaticResource PagePadding}" MaxWidth="{StaticResource PageMaxWidth}"
+                    Spacing="{StaticResource CardSpacing}">
+            <TextBlock x:Uid="GeneralTitle" Style="{StaticResource PageTitleStyle}" />
+
+            <InfoBar x:Name="StatusBar" IsOpen="True" IsClosable="False" Margin="0,0,0,12" />
+            <InfoBar x:Name="ErrorBar" x:Uid="ErrorBar" Severity="Error" IsOpen="False" Margin="0,0,0,12" />
+
+            <controls:SettingsCard x:Uid="EnabledCard">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xEB9F;" />
+                </controls:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon x:Name="EnabledShield" x:Uid="AdminShield" Glyph="&#xE83D;" FontSize="14" />
+                    <ToggleSwitch x:Name="EnabledSwitch" Toggled="OnEnabledToggled" />
+                </StackPanel>
+            </controls:SettingsCard>
+
+            <controls:SettingsCard x:Uid="RefreshCard">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE72C;" />
+                </controls:SettingsCard.HeaderIcon>
+                <Button x:Name="RefreshButton" x:Uid="RefreshButton" Click="OnRefreshClick" />
+            </controls:SettingsCard>
+
+            <controls:SettingsCard x:Uid="AppIconCard">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE91B;" />
+                </controls:SettingsCard.HeaderIcon>
+                <ToggleSwitch x:Name="AppIconSwitch" Toggled="OnAppIconToggled" />
+            </controls:SettingsCard>
+
+            <controls:SettingsCard
+                x:Name="RepairCard"
+                x:Uid="RepairCard"
+                Visibility="Collapsed">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE90F;" />
+                </controls:SettingsCard.HeaderIcon>
+                <Button x:Name="RepairButton" x:Uid="RepairButton" Click="OnRepairClick">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon x:Name="RepairShield" Glyph="&#xE83D;" FontSize="14" />
+                        <TextBlock x:Uid="RepairText" />
+                    </StackPanel>
+                </Button>
+            </controls:SettingsCard>
+
+            <!-- only for installs for every user: windows reads details handlers machine-wide only -->
+            <controls:SettingsCard x:Name="SystemDetailsCard" x:Uid="SystemDetailsCard" Visibility="Collapsed">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE946;" />
+                </controls:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon x:Uid="AdminShield" Glyph="&#xE83D;" FontSize="14" />
+                    <ToggleSwitch x:Name="SystemDetailsSwitch" Toggled="OnSystemDetailsToggled" />
+                </StackPanel>
+            </controls:SettingsCard>
+
+            <!-- the items follow the engine's language values: 0 windows', 1 english, 2 german. a
+                 language is named in itself, so the last two are not translated -->
+            <controls:SettingsCard x:Name="LanguageCard" x:Uid="LanguageCard">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xF2B7;" />
+                </controls:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button x:Name="RestartButton" x:Uid="RestartButton" Visibility="Collapsed" Click="OnRestartClick" />
+                    <ComboBox x:Name="LanguageBox" MinWidth="200" SelectionChanged="OnLanguageChanged">
+                        <ComboBoxItem x:Uid="LanguageWindows" />
+                        <ComboBoxItem Content="English" />
+                        <ComboBoxItem Content="Deutsch" />
+                    </ComboBox>
+                </StackPanel>
+            </controls:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

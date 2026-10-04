@@ -1,0 +1,52 @@
+<Page
+    x:Class="Skyggn.Pages.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    Loaded="OnLoaded">
+
+    <ScrollViewer>
+        <StackPanel Padding="{StaticResource PagePadding}" MaxWidth="{StaticResource PageMaxWidth}"
+                    Spacing="{StaticResource CardSpacing}">
+            <TextBlock x:Uid="AboutTitle" Style="{StaticResource PageTitleStyle}" />
+
+            <controls:SettingsCard x:Name="AppCard" x:Uid="AppCard" Header="skyggn">
+                <controls:SettingsCard.HeaderIcon>
+                    <ImageIcon x:Name="AppIcon" />
+                </controls:SettingsCard.HeaderIcon>
+                <TextBlock x:Name="VersionText" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </controls:SettingsCard>
+
+            <controls:SettingsCard x:Uid="LicenseCard">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE8F1;" />
+                </controls:SettingsCard.HeaderIcon>
+                <Button x:Uid="LicensesButton" Click="OnLicensesClick" />
+            </controls:SettingsCard>
+
+            <TextBlock x:Uid="CreditsHeader" Style="{StaticResource SectionHeaderStyle}" />
+
+            <controls:SettingsCard x:Uid="FFmpegThumbnailsCard">
+                <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/megakraken/FFmpegThumbnails" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="IcarosCard">
+                <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/Xanashi/Icaros" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="RecipeCard">
+                <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/microsoft/Windows-classic-samples/tree/main/Samples/Win7Samples/winui/shell/appshellintegration/RecipeThumbnailProvider" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="FFmpegCard" Header="FFmpeg">
+                <HyperlinkButton Content="ffmpeg.org" NavigateUri="https://ffmpeg.org" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="LibRawCard" Header="LibRaw">
+                <HyperlinkButton Content="libraw.org" NavigateUri="https://www.libraw.org" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="ArchiveCard">
+                <HyperlinkButton Content="libarchive.org" NavigateUri="https://www.libarchive.org" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="ToolkitCard">
+                <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/CommunityToolkit/Windows" />
+            </controls:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

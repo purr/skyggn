@@ -1,0 +1,8 @@
+# build output
+/build/
+/out/
+
+# editors
+/.vs/
+/.vscode/
+*.user

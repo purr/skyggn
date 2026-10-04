@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- each stem ends inside its note head, its right edge on the head's widest point, so no corner
+       sticks out where they meet -->
+  <path d="M8.98 17.19V7.4l9.6-2.2v9.79" fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+  <ellipse cx="7.25" cy="17.6" rx="2.9" ry="2.2" transform="rotate(-20 7.25 17.6)" fill="#ffffff"/>
+  <ellipse cx="16.85" cy="15.4" rx="2.9" ry="2.2" transform="rotate(-20 16.85 15.4)" fill="#ffffff"/>
+</svg>

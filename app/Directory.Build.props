@@ -1,0 +1,7 @@
+<Project>
+  <!-- build output and intermediates go to build/app, keeping the source tree clean -->
+  <PropertyGroup>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\build\app\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\build\app\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>

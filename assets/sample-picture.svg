@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <!-- the picture in the settings app's sample video: a lake below mountains at sunset -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f3b73"/>
+      <stop offset="0.55" stop-color="#c06c84"/>
+      <stop offset="1" stop-color="#f8b195"/>
+    </linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3a683"/>
+      <stop offset="1" stop-color="#2c2c54"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe29a" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ffe29a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <circle cx="820" cy="430" r="190" fill="url(#glow)"/>
+  <circle cx="820" cy="430" r="78" fill="#ffe29a"/>
+  <path d="M0 470 L170 330 L300 420 L460 270 L620 440 L760 360 L900 450 L1060 300 L1280 440 V520 H0 Z" fill="#6c5b7b"/>
+  <path d="M0 500 L210 400 L380 470 L560 380 L720 480 L940 400 L1120 470 L1280 420 V540 H0 Z" fill="#45375f"/>
+  <rect y="520" width="1280" height="200" fill="url(#lake)"/>
+  <ellipse cx="820" cy="560" rx="140" ry="10" fill="#ffe29a" opacity=".55"/>
+  <ellipse cx="820" cy="590" rx="90" ry="6" fill="#ffe29a" opacity=".35"/>
+  <ellipse cx="820" cy="615" rx="50" ry="4" fill="#ffe29a" opacity=".25"/>
+</svg>

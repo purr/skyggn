@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- the settings app's texts in english. names with a dot fill a property of the page element with that x:Uid; the others are read in code. -->
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LanguageTag" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="NavGeneral.Content" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="NavThumbnails.Content" xml:space="preserve">
+    <value>Thumbnails</value>
+  </data>
+  <data name="NavFileTypes.Content" xml:space="preserve">
+    <value>File types</value>
+  </data>
+  <data name="NavAbout.Content" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="ErrorBar.Title" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
+  <data name="AdminShield.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Changes this for every user of this PC</value>
+  </data>
+  <data name="GeneralTitle.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="EnabledCard.Header" xml:space="preserve">
+    <value>Thumbnails from skyggn</value>
+  </data>
+  <data name="EnabledCard.Description" xml:space="preserve">
+    <value>Shows pictures and details for your videos, songs, photos, comics and documents in File Explorer. Turn off to put everything back the way Windows had it.</value>
+  </data>
+  <data name="RefreshCard.Header" xml:space="preserve">
+    <value>Refresh thumbnails</value>
+  </data>
+  <data name="RefreshCard.Description" xml:space="preserve">
+    <value>Windows remembers thumbnails it already made. Refresh so every file gets a new one with your current settings. File Explorer closes for a moment and comes back.</value>
+  </data>
+  <data name="RefreshButton.Content" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="AppIconCard.Header" xml:space="preserve">
+    <value>App icon on thumbnails</value>
+  </data>
+  <data name="AppIconCard.Description" xml:space="preserve">
+    <value>Windows can draw a small app icon on the thumbnails of other files, like documents. skyggn's own thumbnails never get it.</value>
+  </data>
+  <data name="RepairCard.Header" xml:space="preserve">
+    <value>Broken thumbnail entries</value>
+  </data>
+  <data name="RepairButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Fix</value>
+  </data>
+  <data name="RepairText.Text" xml:space="preserve">
+    <value>Fix</value>
+  </data>
+  <data name="LanguageCard.Header" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageWindows.Content" xml:space="preserve">
+    <value>Same as Windows</value>
+  </data>
+  <data name="RestartButton.Content" xml:space="preserve">
+    <value>Restart skyggn</value>
+  </data>
+  <data name="StatusOnTitle" xml:space="preserve">
+    <value>skyggn is on</value>
+  </data>
+  <data name="StatusOnMessage" xml:space="preserve">
+    <value>It makes thumbnails for {0} file types.</value>
+  </data>
+  <data name="StatusOnMessageUser" xml:space="preserve">
+    <value>It makes thumbnails for {0} file types, for your account only.</value>
+  </data>
+  <data name="StatusOffTitle" xml:space="preserve">
+    <value>skyggn is off</value>
+  </data>
+  <data name="StatusOffMessage" xml:space="preserve">
+    <value>Windows makes thumbnails only for the formats it knows.</value>
+  </data>
+  <data name="RepairDescriptionOne" xml:space="preserve">
+    <value>1 file type points to a thumbnail program that is no longer installed, so those files show no thumbnails at all. Fix removes the leftovers.</value>
+  </data>
+  <data name="RepairDescriptionMany" xml:space="preserve">
+    <value>{0} file types point to a thumbnail program that is no longer installed, so those files show no thumbnails at all. Fix removes the leftovers.</value>
+  </data>
+  <data name="RefreshDialogTitle" xml:space="preserve">
+    <value>Refresh thumbnails?</value>
+  </data>
+  <data name="RefreshDialogContent" xml:space="preserve">
+    <value>File Explorer closes for a moment and opens again with its windows. Every thumbnail, photos included, is made again as you browse.</value>
+  </data>
+  <data name="RefreshDialogRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="DialogCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ThumbnailsTitle.Text" xml:space="preserve">
+    <value>Thumbnails</value>
+  </data>
+  <data name="PreviewExpander.Header" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="PreviewExpander.Description" xml:space="preserve">
+    <value>How thumbnails look with the settings below, on a video and on a song without a cover. Choose a file to see one of your own too.</value>
+  </data>
+  <data name="ChooseButton.Content" xml:space="preserve">
+    <value>Choose a file…</value>
+  </data>
+  <data name="PreviewMaking" xml:space="preserve">
+    <value>Making the thumbnail…</value>
+  </data>
+  <data name="PreviewFailed" xml:space="preserve">
+    <value>No thumbnail: {0}</value>
+  </data>
+  <data name="LookHeader.Text" xml:space="preserve">
+    <value>Look</value>
+  </data>
+  <data name="BadgeCard.Header" xml:space="preserve">
+    <value>Badge</value>
+  </data>
+  <data name="BadgeNone.Content" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="BadgeFrosted.Content" xml:space="preserve">
+    <value>Frosted glass</value>
+  </data>
+  <data name="BadgeTinted.Content" xml:space="preserve">
+    <value>Coloured by kind</value>
+  </data>
+  <data name="BadgeLabelled.Content" xml:space="preserve">
+    <value>With the file type (MKV, MP3…)</value>
+  </data>
+  <data name="BadgeCornerCard.Header" xml:space="preserve">
+    <value>Badge position</value>
+  </data>
+  <data name="CornerBottomRight.Content" xml:space="preserve">
+    <value>Bottom right</value>
+  </data>
+  <data name="CornerBottomLeft.Content" xml:space="preserve">
+    <value>Bottom left</value>
+  </data>
+  <data name="CornerTopRight.Content" xml:space="preserve">
+    <value>Top right</value>
+  </data>
+  <data name="CornerTopLeft.Content" xml:space="preserve">
+    <value>Top left</value>
+  </data>
+  <data name="BadgeSizeCard.Header" xml:space="preserve">
+    <value>Badge size</value>
+  </data>
+  <data name="PlaceholderCard.Header" xml:space="preserve">
+    <value>Files without a picture</value>
+  </data>
+  <data name="PlaceholderNone.Content" xml:space="preserve">
+    <value>Windows' usual icon</value>
+  </data>
+  <data name="PlaceholderKind.Content" xml:space="preserve">
+    <value>Tile in the kind's colour</value>
+  </data>
+  <data name="PlaceholderPerFile.Content" xml:space="preserve">
+    <value>Tile coloured by its contents (copies match)</value>
+  </data>
+  <data name="VideosHeader.Text" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="PositionCard.Header" xml:space="preserve">
+    <value>Where the picture is taken</value>
+  </data>
+  <data name="BlackFramesCard.Header" xml:space="preserve">
+    <value>Skip blank frames</value>
+  </data>
+  <data name="CoverArtCard.Header" xml:space="preserve">
+    <value>Use the video's own cover</value>
+  </data>
+  <data name="PerformanceHeader.Text" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="LowImpactCard.Header" xml:space="preserve">
+    <value>Gentle mode</value>
+  </data>
+  <data name="TimeLimitCard.Header" xml:space="preserve">
+    <value>Time limit per file</value>
+  </data>
+  <data name="SecondsText.Text" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="FileTypesTitle.Text" xml:space="preserve">
+    <value>File types</value>
+  </data>
+  <data name="FileTypesIntro.Text" xml:space="preserve">
+    <value>Choose which files get their pictures from skyggn. A type you turn off goes back to how Windows shows it.</value>
+  </data>
+  <data name="OffBar.Title" xml:space="preserve">
+    <value>skyggn is off</value>
+  </data>
+  <data name="OffBar.Message" xml:space="preserve">
+    <value>Turn it on on the General page to choose file types.</value>
+  </data>
+  <data name="AllButton.Content" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="RecommendedButton.Content" xml:space="preserve">
+    <value>Recommended</value>
+  </data>
+  <data name="NoneButton.Content" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="DiscardButton.Content" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="ApplyButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ApplyText.Text" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="PendingOne" xml:space="preserve">
+    <value>1 change</value>
+  </data>
+  <data name="PendingMany" xml:space="preserve">
+    <value>{0} changes</value>
+  </data>
+  <data name="GroupVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="GroupAudio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="GroupImage" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="GroupRaw" xml:space="preserve">
+    <value>Camera RAW</value>
+  </data>
+  <data name="GroupBook" xml:space="preserve">
+    <value>Comics and e-books</value>
+  </data>
+  <data name="GroupVideoDescription" xml:space="preserve">
+    <value>A frame from the video, or its cover art</value>
+  </data>
+  <data name="GroupAudioDescription" xml:space="preserve">
+    <value>The album cover embedded in the file</value>
+  </data>
+  <data name="GroupImageDescription" xml:space="preserve">
+    <value>The picture itself, including HEIC, AVIF and JPEG XL, and the preview in Illustrator and EPS files</value>
+  </data>
+  <data name="GroupRawDescription" xml:space="preserve">
+    <value>The camera's own preview, or the photo developed from the file</value>
+  </data>
+  <data name="GroupBookDescription" xml:space="preserve">
+    <value>The cover: a comic's first page, an e-book's cover picture</value>
+  </data>
+  <data name="GroupSummary" xml:space="preserve">
+    <value>{0} of {1} on</value>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AppCard.Description" xml:space="preserve">
+    <value>Thumbnails and details for every video, audio, image, camera RAW, comic and document format.</value>
+  </data>
+  <data name="VersionText" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="LicenseCard.Header" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="LicenseCard.Description" xml:space="preserve">
+    <value>Free software under the GNU General Public License, version 3 or later.</value>
+  </data>
+  <data name="LicensesButton.Content" xml:space="preserve">
+    <value>Open license files</value>
+  </data>
+  <data name="CreditsHeader.Text" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="FFmpegThumbnailsCard.Header" xml:space="preserve">
+    <value>FFmpegThumbnails by megakraken</value>
+  </data>
+  <data name="FFmpegThumbnailsCard.Description" xml:space="preserve">
+    <value>Showed how to feed Windows' file stream into FFmpeg for Explorer thumbnails.</value>
+  </data>
+  <data name="IcarosCard.Header" xml:space="preserve">
+    <value>Icaros by Xanashi</value>
+  </data>
+  <data name="IcarosCard.Description" xml:space="preserve">
+    <value>Has given Explorer FFmpeg thumbnails for years, as freeware. skyggn is an open-source alternative to it.</value>
+  </data>
+  <data name="RecipeCard.Header" xml:space="preserve">
+    <value>Microsoft's recipe thumbnail provider sample</value>
+  </data>
+  <data name="RecipeCard.Description" xml:space="preserve">
+    <value>The pattern every thumbnail provider, this one included, builds on.</value>
+  </data>
+  <data name="FFmpegCard.Description" xml:space="preserve">
+    <value>Decodes video, audio and images. LGPL 3.0.</value>
+  </data>
+  <data name="LibRawCard.Description" xml:space="preserve">
+    <value>Reads camera RAW files. LGPL 2.1.</value>
+  </data>
+  <data name="ArchiveCard.Header" xml:space="preserve">
+    <value>libarchive, zlib and xz</value>
+  </data>
+  <data name="ArchiveCard.Description" xml:space="preserve">
+    <value>Open comics and e-books. BSD, zlib and 0BSD licenses.</value>
+  </data>
+  <data name="ToolkitCard.Header" xml:space="preserve">
+    <value>Windows Implementation Library and Windows Community Toolkit</value>
+  </data>
+  <data name="ToolkitCard.Description" xml:space="preserve">
+    <value>Keep the Windows code short and this app looking like Windows. MIT.</value>
+  </data>
+  <data name="EngineMissing" xml:space="preserve">
+    <value>skyggn-engine.dll is missing next to skyggn.exe. Reinstall skyggn to repair it.</value>
+  </data>
+  <data name="Crashed" xml:space="preserve">
+    <value>skyggn stopped because of an error:
+{0}
+
+The details are in {1}.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>{0} failed: {1}</value>
+  </data>
+  <data name="ActionSaving" xml:space="preserve">
+    <value>saving {0}</value>
+  </data>
+  <data name="ActionThumbnail" xml:space="preserve">
+    <value>thumbnail of {0}</value>
+  </data>
+  <data name="ActionInstall" xml:space="preserve">
+    <value>turning skyggn on</value>
+  </data>
+  <data name="ActionRegister" xml:space="preserve">
+    <value>registering skyggn</value>
+  </data>
+  <data name="ActionUnregister" xml:space="preserve">
+    <value>unregistering skyggn</value>
+  </data>
+  <data name="ActionTypeOn" xml:space="preserve">
+    <value>turning on {0}</value>
+  </data>
+  <data name="ActionTypeOff" xml:space="preserve">
+    <value>turning off {0}</value>
+  </data>
+  <data name="ActionRepair" xml:space="preserve">
+    <value>repairing thumbnail entries</value>
+  </data>
+  <data name="ActionCountDead" xml:space="preserve">
+    <value>looking for broken thumbnail entries</value>
+  </data>
+  <data name="ControlNotStarted" xml:space="preserve">
+    <value>skyggnctl {0} did not start</value>
+  </data>
+  <data name="ControlFailed" xml:space="preserve">
+    <value>skyggnctl {0} failed (exit code {1})</value>
+  </data>
+  <data name="CacheSession" xml:space="preserve">
+    <value>starting a restart manager session</value>
+  </data>
+  <data name="CacheRegister" xml:space="preserve">
+    <value>registering the thumbnail cache files</value>
+  </data>
+  <data name="CacheClose" xml:space="preserve">
+    <value>closing File Explorer</value>
+  </data>
+  <data name="CacheRestart" xml:space="preserve">
+    <value>starting File Explorer again</value>
+  </data>
+  <data name="CacheInUse" xml:space="preserve">
+    <value>these thumbnail cache files were still in use: {0}</value>
+  </data>
+  <data name="CacheList" xml:space="preserve">
+    <value>finding the programs that use the thumbnail cache</value>
+  </data>
+  <data name="CacheHeldBy" xml:space="preserve">
+    <value>Close {0} first, then refresh again. It uses the thumbnail cache too, and closing it for you could lose unsaved work.</value>
+  </data>
+  <data name="PreviewSampleVideo" xml:space="preserve">
+    <value>Sample video</value>
+  </data>
+  <data name="PreviewSampleSong" xml:space="preserve">
+    <value>Sample song without a cover</value>
+  </data>
+  <data name="RefreshBar.Title" xml:space="preserve">
+    <value>File Explorer still shows the old thumbnails</value>
+  </data>
+  <data name="RefreshBar.Message" xml:space="preserve">
+    <value>Windows keeps the thumbnails it already made. Refresh them so every file shows your changes.</value>
+  </data>
+  <data name="RefreshNowButton.Content" xml:space="preserve">
+    <value>Refresh now</value>
+  </data>
+  <data name="GroupDocument" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="GroupDocumentDescription" xml:space="preserve">
+    <value>The first page of a PDF or an InDesign layout, or the preview LibreOffice and OpenOffice save in their files</value>
+  </data>
+  <data name="SystemDetailsCard.Header" xml:space="preserve">
+    <value>Details for MKV and WebM</value>
+  </data>
+  <data name="SystemDetailsCard.Description" xml:space="preserve">
+    <value>Windows keeps the details of MKV and WebM files for its own handler, which shows little more than the length. Turn on to show skyggn's instead: frame size, codecs, audio and subtitle tracks, chapters. This sets aside entries Windows protects; turning it off puts them back, and a Windows update may put them back too.</value>
+  </data>
+</root>

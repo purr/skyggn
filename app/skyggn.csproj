@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <RootNamespace>Skyggn</RootNamespace>
+    <AssemblyName>skyggn</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\skyggn.ico</ApplicationIcon>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseWinUI>true</UseWinUI>
+    <!-- an ordinary exe next to the engine, carrying its own windows app sdk: nothing to install first -->
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <!-- builds skyggn.pri, the compiled xaml every window loads; unpackaged apps need it too -->
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <!-- the texts in Strings/<language>/Resources.resw; english where a language has none -->
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <SelfContained>true</SelfContained>
+    <!-- native code: starts fast, small memory, no .net runtime needed -->
+    <PublishAot>true</PublishAot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.5.1" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2705" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\skyggn.ico" CopyToOutputDirectory="PreserveNewest" />
+    <!-- previewed on the thumbnails page; scripts\make-samples.ps1 renders them -->
+    <Content Include="Assets\samples\*" CopyToOutputDirectory="PreserveNewest" />
+    <!-- the windows app sdk's files ship self-contained, so its license ships with them -->
+    <Content Include="$(PkgMicrosoft_WindowsAppSDK)\license.txt" Link="licenses\windows-app-sdk-license.txt"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,4 @@
+LIBRARY skyggn-engine
+EXPORTS
+    DllGetClassObject PRIVATE
+    DllCanUnloadNow PRIVATE

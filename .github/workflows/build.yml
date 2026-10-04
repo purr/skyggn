@@ -1,0 +1,154 @@
+# builds skyggn on every push and pull request. a pushed version tag (v1.2.3) also
+# publishes a github release: the installer, its checksum, and that version's section of
+# CHANGELOG.md as the release text.
+#
+# to release: set the version in CMakeLists.txt, add a "## [1.2.3]" section to CHANGELOG.md,
+# commit, then push the tag:  git tag v1.2.3 && git push origin v1.2.3
+
+name: build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  # a release run is never cut short by a later push
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+jobs:
+  build:
+    name: build
+    # the image with visual studio 2026, which the cmake preset's generator needs; it also has
+    # cmake 4, the .net 10 sdk and inno setup 6.7
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 60
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # the version lives in CMakeLists.txt only; a tag must match it and have a changelog entry
+      - name: read the version
+        id: version
+        run: |
+          $cmake = Get-Content CMakeLists.txt -Raw
+          if ($cmake -notmatch 'project\(skyggn\s+VERSION\s+(\d+\.\d+\.\d+)') {
+            throw 'version: no "project(skyggn VERSION x.y.z)" in CMakeLists.txt'
+          }
+          $version = $Matches[1]
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            if ($env:GITHUB_REF_NAME -ne "v$version") {
+              throw "version: tag $env:GITHUB_REF_NAME does not match CMakeLists.txt version $version"
+            }
+            if (-not (Select-String -Path CHANGELOG.md -SimpleMatch "## [$version]" -Quiet)) {
+              throw "version: CHANGELOG.md has no '## [$version]' section"
+            }
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "skyggn $version"
+
+      # libarchive, zlib and xz take many minutes to build; their install folder records its
+      # versions, and configure skips building them again when those match (cmake/dependencies.cmake)
+      - name: restore the archive libraries
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: build/_deps/archive-install
+          key: archive-${{ runner.os }}-${{ hashFiles('cmake/dependencies.cmake') }}
+
+      - name: configure
+        run: cmake --preset x64
+
+      - name: build
+        run: cmake --build --preset release
+
+      - name: build the installer
+        run: cmake --build --preset release --target installer
+
+      - name: collect the release files
+        run: |
+          $setup = "skyggn-${{ steps.version.outputs.version }}-x64-setup.exe"
+          New-Item -ItemType Directory dist | Out-Null
+          Copy-Item "build/dist/$setup" dist/
+          # the format sha256sum -c reads: hash, two spaces, file name
+          $hash = (Get-FileHash "dist/$setup" -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  $setup" | Out-File dist/SHA256SUMS.txt -Encoding ascii
+          Get-ChildItem dist | Format-Table Name, Length
+
+      - name: upload
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: skyggn-${{ steps.version.outputs.version }}-x64
+          path: dist/*
+          if-no-files-found: error
+
+  release:
+    name: publish the release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: download the build
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: skyggn-${{ needs.build.outputs.version }}-x64
+          path: dist
+
+      - name: write the release text
+        env:
+          VERSION: ${{ needs.build.outputs.version }}
+        run: |
+          # this version's section of CHANGELOG.md: from its heading to the next version's
+          awk -v head="## [$VERSION]" '
+            index($0, head) == 1 { found = 1; next }
+            found && /^## \[/ { exit }
+            found { print }
+          ' CHANGELOG.md > notes.md
+          if ! grep -q '[^[:space:]]' notes.md; then
+            echo "::error::CHANGELOG.md has no text under '## [$VERSION]'"
+            exit 1
+          fi
+          cat >> notes.md <<EOF
+
+          ## download
+
+          | file | what |
+          | --- | --- |
+          | \`skyggn-$VERSION-x64-setup.exe\` | the installer, for windows 10 and 11 on x64 |
+          | \`SHA256SUMS.txt\` | its sha-256 checksum |
+
+          the setup asks for admin rights once and turns skyggn on for every user of the pc. it is
+          not code-signed, so windows smartscreen asks first: **more info**, then **run anyway**.
+          uninstalling (settings > apps) gives every file type its previous thumbnails back.
+
+          built by github actions from \`$GITHUB_SHA\`.
+          EOF
+          cat notes.md
+
+      - name: publish
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: skyggn ${{ needs.build.outputs.version }}
+          body_path: notes.md
+          files: dist/*
+          fail_on_unmatched_files: true
+          make_latest: true

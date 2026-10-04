@@ -140,3 +140,28 @@ SKYGGN_API void skyggn_notify_shell();
 SKYGGN_API HRESULT skyggn_take_system_details(BOOL take);
 // whether skyggn serves those types' details now (a windows update can put windows' back)
 SKYGGN_API BOOL skyggn_system_details_taken();
+
+// what skyggn_prepare_folder did with the files it found
+struct skyggn_prepare_result {
+    UINT made;                // thumbnails windows made now
+    UINT kept;                // files windows already had a thumbnail of, left as they were (without force)
+    UINT without_picture;     // files windows has no thumbnail of: no picture and the tile off, or unreadable
+    UINT online_only;         // cloud files not on this pc, left alone: reading them would download them
+    UINT unreadable_folders;  // subfolders this account may not open
+};
+
+// told how far skyggn_prepare_folder is. while it looks for files, `done` is 0, `total` the number
+// found so far and `file` the folder it reads next; then once with `done` 0, the final `total` and
+// an empty `file`; then after each file, `done` of `total` and `file` the one just done. returns
+// FALSE to stop.
+typedef BOOL(CALLBACK* skyggn_progress)(void* context, UINT done, UINT total, const wchar_t* file);
+
+// has windows make the thumbnails of every file in `folder` that skyggn makes thumbnails for (and in
+// its subfolders, with `recursive`) and keep them, the way file explorer asks for them, so explorer
+// shows them at once. without `force`, a file windows already has a thumbnail of is left as it is;
+// with it, every thumbnail is made again (after a change to how they look). online-only cloud files
+// are left alone. several files are made at a time; `progress`, which may be null, hears from one
+// thread at a time. stopped through `progress`, it returns HRESULT_FROM_WIN32(ERROR_CANCELLED), and
+// `result` counts what was done until then.
+SKYGGN_API HRESULT skyggn_prepare_folder(const wchar_t* folder, BOOL recursive, BOOL force, skyggn_progress progress,
+                                         void* context, skyggn_prepare_result* result);

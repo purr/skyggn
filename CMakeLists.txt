@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 
 project(skyggn
-    VERSION 0.1.1
+    VERSION 0.1.2
     DESCRIPTION "explorer thumbnails for every video and audio format"
     LANGUAGES CXX)
 

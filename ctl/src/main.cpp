@@ -38,6 +38,8 @@ commands:
   status                                   show which thumbnail handler windows uses per file type
   repair [--user]                          remove thumbnail entries whose program is gone
   refresh <folder> [--recursive]           remake the thumbnails windows keeps for a folder's files
+  prepare <folder> [--recursive]           make the thumbnails windows does not have yet for a folder's
+                                           files, so explorer shows them at once
   settings                                 show your settings
   set <name> <value>                       change one of your settings
   thumb <file> <out.png> [--size n]        make a thumbnail with the engine in this process
@@ -303,84 +305,47 @@ int repair(const arguments& args) {
     return kExitOk;
 }
 
-// windows keeps a thumbnail per file and size; these are the sizes file explorer's medium to extra
-// large views read, 1280 on high-dpi screens. smaller ones carry no badge, so they look the same
-// either way.
-constexpr UINT kRefreshSizes[] = {96, 256, 1280};
+// tells how far skyggn_prepare_folder is, on one line that each file overwrites
+BOOL CALLBACK show_progress(void* verb, UINT done, UINT total, const wchar_t*) {
+    wprintf(L"\r%s %u of %u", static_cast<const wchar_t*>(verb), done, total);
+    fflush(stdout);
+    return TRUE;
+}
 
-int refresh(const arguments& args) {
+// refresh makes every thumbnail of the folder again; prepare makes the ones windows does not have yet
+int prepare(const arguments& args, bool force) {
     if (args.positional.size() != 1) {
         fwprintf(stderr, L"%s", kUsage);
         return kExitUsage;
     }
     const std::wstring& root = args.positional[0];
-    std::vector<std::wstring> files;
-    std::vector<std::wstring> folders{root};
-    UINT online_only = 0;
-    UINT unreadable_folders = 0;
-    while (!folders.empty()) {
-        const std::wstring folder = std::move(folders.back());
-        folders.pop_back();
-        WIN32_FIND_DATAW data{};
-        wil::unique_hfind find(FindFirstFileW((folder + L"\\*").c_str(), &data));
-        if (!find) {
-            if (folder == root) {
-                return fail(L"reading " + folder, HRESULT_FROM_WIN32(GetLastError()), args.scope);
-            }
-            ++unreadable_folders;  // a subfolder this account may not open; reported at the end
-            continue;
+    skyggn_prepare_result result{};
+    const wchar_t* verb = force ? L"refreshing" : L"making";
+    if (HRESULT hr = skyggn_prepare_folder(root.c_str(), args.recursive, force, show_progress,
+                                           const_cast<wchar_t*>(verb), &result);
+        FAILED(hr)) {
+        wprintf(L"\n");
+        return fail(L"reading " + root, hr, args.scope);
+    }
+    if (force) {
+        wprintf(L"\r%srefreshed%s %u file%s in %s%s", paint(2), paint(0), result.made, result.made == 1 ? L"" : L"s",
+                root.c_str(), args.recursive ? L" and its subfolders" : L"");
+    } else {
+        wprintf(L"\r%smade%s %u thumbnail%s in %s%s", paint(2), paint(0), result.made, result.made == 1 ? L"" : L"s",
+                root.c_str(), args.recursive ? L" and its subfolders" : L"");
+        if (result.kept > 0) {
+            wprintf(L"; %u %s there already", result.kept, result.kept == 1 ? L"was" : L"were");
         }
-        do {
-            const std::wstring_view name = data.cFileName;
-            if (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-                // links to other folders are not followed: they can loop, or lead off this folder
-                if (args.recursive && name != L"." && name != L".." &&
-                    !(data.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)) {
-                    folders.push_back(folder + L"\\" + data.cFileName);
-                }
-                continue;
-            }
-            if (skyggn_effective_handler(PathFindExtensionW(data.cFileName)) != SKYGGN_HANDLER_SKYGGN) {
-                continue;
-            }
-            // reading a cloud file that is not on this pc would download it
-            if (data.dwFileAttributes & (FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS | FILE_ATTRIBUTE_RECALL_ON_OPEN |
-                                         FILE_ATTRIBUTE_OFFLINE)) {
-                ++online_only;
-                continue;
-            }
-            files.push_back(folder + L"\\" + data.cFileName);
-        } while (FindNextFileW(find.get(), &data));
     }
-
-    auto cache = wil::CoCreateInstance<IThumbnailCache>(CLSID_LocalThumbnailCache);
-    // forced extraction replaces the kept thumbnail with a new one
-    const auto flags = static_cast<WTS_FLAGS>(WTS_EXTRACT | WTS_FORCEEXTRACTION);
-    UINT refreshed = 0;
-    UINT without_picture = 0;
-    for (size_t i = 0; i < files.size(); ++i) {
-        wprintf(L"\rrefreshing %zu of %zu", i + 1, files.size());
-        fflush(stdout);
-        wil::com_ptr<IShellItem> item;
-        bool made = SUCCEEDED(SHCreateItemFromParsingName(files[i].c_str(), nullptr, IID_PPV_ARGS(&item)));
-        for (UINT size : kRefreshSizes) {
-            wil::com_ptr<ISharedBitmap> bitmap;
-            made = made && SUCCEEDED(cache->GetThumbnail(item.get(), size, flags, &bitmap, nullptr, nullptr));
-        }
-        // open explorer windows draw the file again
-        SHChangeNotify(SHCNE_UPDATEITEM, SHCNF_PATHW, files[i].c_str(), nullptr);
-        made ? ++refreshed : ++without_picture;
+    if (result.without_picture > 0) {
+        wprintf(L"; %u had no picture (an audio file without cover art) or could not be read", result.without_picture);
     }
-    wprintf(L"\r%srefreshed%s %u file%s in %s%s", paint(2), paint(0), refreshed, refreshed == 1 ? L"" : L"s",
-            root.c_str(), args.recursive ? L" and its subfolders" : L"");
-    if (without_picture > 0) {
-        wprintf(L"; %u had no picture (an audio file without cover art) or could not be read", without_picture);
+    if (result.online_only > 0) {
+        wprintf(L"; %u online-only cloud file%s left alone", result.online_only, result.online_only == 1 ? L"" : L"s");
     }
-    if (online_only > 0) {
-        wprintf(L"; %u online-only cloud file%s left alone", online_only, online_only == 1 ? L"" : L"s");
-    }
-    if (unreadable_folders > 0) {
-        wprintf(L"; %u subfolder%s could not be opened", unreadable_folders, unreadable_folders == 1 ? L"" : L"s");
+    if (result.unreadable_folders > 0) {
+        wprintf(L"; %u subfolder%s could not be opened", result.unreadable_folders,
+                result.unreadable_folders == 1 ? L"" : L"s");
     }
     wprintf(L"\n");
     return kExitOk;
@@ -612,7 +577,10 @@ int run(const arguments& args) {
         return repair(args);
     }
     if (args.command == L"refresh") {
-        return refresh(args);
+        return prepare(args, true);
+    }
+    if (args.command == L"prepare") {
+        return prepare(args, false);
     }
     if (args.command == L"settings") {
         return show_settings();

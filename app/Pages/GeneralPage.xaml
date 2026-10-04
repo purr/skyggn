@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
-    Loaded="OnLoaded">
+    Loaded="OnLoaded"
+    Unloaded="OnUnloaded">
 
     <ScrollViewer>
         <StackPanel Padding="{StaticResource PagePadding}" MaxWidth="{StaticResource PageMaxWidth}"
@@ -29,6 +30,30 @@
                 </controls:SettingsCard.HeaderIcon>
                 <Button x:Name="RefreshButton" x:Uid="RefreshButton" Click="OnRefreshClick" />
             </controls:SettingsCard>
+
+            <controls:SettingsExpander x:Uid="PrepareCard" IsExpanded="True">
+                <controls:SettingsExpander.HeaderIcon>
+                    <FontIcon Glyph="&#xE8B9;" />
+                </controls:SettingsExpander.HeaderIcon>
+                <Button x:Name="PrepareButton" MinWidth="96" Click="OnPrepareClick" />
+                <controls:SettingsExpander.Items>
+                    <controls:SettingsCard x:Uid="PrepareFolderCard">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox x:Name="PrepareFolderBox" x:Uid="PrepareFolderBox" MinWidth="280" MaxWidth="420" />
+                            <Button x:Name="PrepareBrowseButton" x:Uid="PrepareBrowseButton" Click="OnPrepareBrowseClick" />
+                        </StackPanel>
+                    </controls:SettingsCard>
+                    <controls:SettingsCard x:Uid="PrepareSubfoldersCard">
+                        <ToggleSwitch x:Name="PrepareSubfoldersSwitch" IsOn="True" />
+                    </controls:SettingsCard>
+                    <controls:SettingsCard x:Name="PrepareProgressCard" ContentAlignment="Left" Visibility="Collapsed">
+                        <StackPanel Spacing="6" MinWidth="360">
+                            <ProgressBar x:Name="PrepareProgressBar" Minimum="0" Maximum="1" />
+                            <TextBlock x:Name="PrepareProgressText" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </controls:SettingsCard>
+                </controls:SettingsExpander.Items>
+            </controls:SettingsExpander>
 
             <controls:SettingsCard x:Uid="AppIconCard">
                 <controls:SettingsCard.HeaderIcon>

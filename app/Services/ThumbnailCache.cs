@@ -67,7 +67,15 @@ public static partial class ThumbnailCache
         {
             return running;
         }
-        return s_clearing = Task.Run(Clear);
+        return s_clearing = ClearAfterPreparingAsync();
+    }
+
+    // a folder whose thumbnails are being made has the cache files open from this process, which the
+    // restart manager would name as a program to close: it stops, and ends, first
+    private static async Task ClearAfterPreparingAsync()
+    {
+        await FolderPreparation.StopAsync();
+        await Task.Run(Clear);
     }
 
     private static unsafe void Clear()

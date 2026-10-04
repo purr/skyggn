@@ -5,6 +5,7 @@
 #include "build_info.h"
 #include "decoder.h"
 #include "image.h"
+#include "prepare.h"
 #include "properties.h"
 #include "formats.h"
 #include "registration.h"
@@ -86,6 +87,18 @@ CATCH_RETURN()
 SKYGGN_API BOOL skyggn_system_details_taken() {
     return system_details_taken() ? TRUE : FALSE;
 }
+
+SKYGGN_API HRESULT skyggn_prepare_folder(const wchar_t* folder, BOOL recursive, BOOL force, skyggn_progress progress,
+                                         void* context, skyggn_prepare_result* result) try {
+    RETURN_HR_IF_NULL(E_POINTER, result);
+    *result = {};
+    RETURN_HR_IF_NULL(E_INVALIDARG, folder);
+    // windows' file type lookups need com on this thread; the workers join com themselves
+    const com_scope com;
+    RETURN_HR_IF(com.result, FAILED(com.result) && com.result != RPC_E_CHANGED_MODE);
+    return prepare_folder(folder, recursive != FALSE, force != FALSE, progress, context, *result);
+}
+CATCH_RETURN()
 
 SKYGGN_API HRESULT skyggn_details(const wchar_t* path, BOOL isolated, IPropertyStore** store) {
     return details_of(path, isolated != FALSE, store);

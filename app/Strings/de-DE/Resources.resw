@@ -418,4 +418,61 @@ Die Einzelheiten stehen in {1}.</value>
   <data name="SystemDetailsCard.Description" xml:space="preserve">
     <value>Windows behält die Details von MKV- und WebM-Dateien seinem eigenen Programm vor, das kaum mehr als die Länge zeigt. Schalten Sie dies ein, um stattdessen die von skyggn zu sehen: Bildgröße, Codecs, Audio- und Untertitelspuren, Kapitel. Dafür werden Einträge beiseitegelegt, die Windows schützt; Ausschalten stellt sie wieder her, und ein Windows-Update kann sie ebenfalls wiederherstellen.</value>
   </data>
+  <data name="PrepareCard.Header" xml:space="preserve">
+    <value>Miniaturansichten jetzt erstellen</value>
+  </data>
+  <data name="PrepareCard.Description" xml:space="preserve">
+    <value>Die Miniaturansichten der Dateien eines Ordners vorab erstellen, damit der Datei-Explorer sie sofort zeigt. Dateien, die schon eine haben, bleiben, wie sie sind.</value>
+  </data>
+  <data name="PrepareFolderCard.Header" xml:space="preserve">
+    <value>Ordner</value>
+  </data>
+  <data name="PrepareFolderBox.PlaceholderText" xml:space="preserve">
+    <value>Pfad eines Ordners einfügen</value>
+  </data>
+  <data name="PrepareBrowseButton.Content" xml:space="preserve">
+    <value>Durchsuchen…</value>
+  </data>
+  <data name="PrepareSubfoldersCard.Header" xml:space="preserve">
+    <value>Unterordner einbeziehen</value>
+  </data>
+  <data name="PrepareStart" xml:space="preserve">
+    <value>Starten</value>
+  </data>
+  <data name="PrepareStop" xml:space="preserve">
+    <value>Stoppen</value>
+  </data>
+  <data name="PrepareListing" xml:space="preserve">
+    <value>Dateien werden gesucht…</value>
+  </data>
+  <data name="PrepareFound" xml:space="preserve">
+    <value>Gefundene Dateien: {0}</value>
+  </data>
+  <data name="PrepareProgress" xml:space="preserve">
+    <value>{0} von {1}: {2}</value>
+  </data>
+  <data name="PrepareDone" xml:space="preserve">
+    <value>Fertig. Erstellt: {0}. Bereits vorhanden: {1}.</value>
+  </data>
+  <data name="PrepareStopped" xml:space="preserve">
+    <value>Gestoppt. Erstellt: {0}. Bereits vorhanden: {1}.</value>
+  </data>
+  <data name="PrepareNoPicture" xml:space="preserve">
+    <value>Ohne Bild oder nicht lesbar: {0}.</value>
+  </data>
+  <data name="PrepareOnlineOnly" xml:space="preserve">
+    <value>Nur online verfügbare Cloud-Dateien, ausgelassen, damit nichts heruntergeladen wird: {0}.</value>
+  </data>
+  <data name="PrepareUnreadable" xml:space="preserve">
+    <value>Unterordner, die sich nicht öffnen ließen: {0}.</value>
+  </data>
+  <data name="PrepareNoFolder" xml:space="preserve">
+    <value>Fügen Sie zuerst den Pfad eines Ordners ein, oder wählen Sie einen Ordner.</value>
+  </data>
+  <data name="PrepareMissing" xml:space="preserve">
+    <value>{0} ist kein Ordner.</value>
+  </data>
+  <data name="ActionPrepare" xml:space="preserve">
+    <value>Erstellen der Miniaturansichten von {0}</value>
+  </data>
 </root>

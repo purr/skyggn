@@ -3,6 +3,15 @@
 what changed in each release of skyggn. a release's section here is also its text on the
 releases page.
 
+## [0.1.2]
+
+- **make thumbnails now**, on the app's general page: paste or pick a folder, with or without its
+  subfolders, and skyggn has windows make the thumbnails its files do not have yet, three at a time,
+  with a progress bar that can stop. opened in file explorer afterwards, the folder shows its
+  thumbnails at once. online-only cloud files are left alone, so nothing is downloaded. `skyggnctl prepare
+  <folder> [--recursive]` does the same from a prompt, and `skyggnctl refresh` now makes three at a
+  time too.
+
 ## [0.1.1]
 
 - thumbnails come several times faster. windows asks for them at 1280 px to fill its cache, and

@@ -62,8 +62,10 @@ runs:
 | song with cover art, mp3 | 172 ms | 135 ms |
 | song without cover art, mp3 (tile) | 157 ms | 135 ms |
 
-windows makes thumbnails one at a time, for every thumbnail program alike, and keeps them: each
-file costs this once.
+windows makes thumbnails as file explorer asks for them, for every thumbnail program alike, and
+keeps them: each file costs this once. for a big folder, **make thumbnails now** in the app (or
+`skyggnctl prepare`) makes them ahead of time, three at a time, so the folder shows them at once.
+online-only cloud files are left alone, so nothing is downloaded.
 
 ## install
 
@@ -110,9 +112,10 @@ skyggn's settings app is built with winui 3, like windows 11's own apps: mica, s
 light and dark mode. it runs only while it is open, in english or german: windows' language by
 default, or the one chosen on its general page. the installer follows windows' language too.
 
-- **general**: turn skyggn on or off, refresh thumbnails, show or hide the app icon windows puts
-  on thumbnails, fix broken entries left behind by removed thumbnail programs, and pick the app's
-  language.
+- **general**: turn skyggn on or off, refresh thumbnails, make a folder's thumbnails ahead of time
+  (paste or pick a folder, with or without its subfolders, and follow it on a progress bar), show
+  or hide the app icon windows puts on thumbnails, fix broken entries left behind by removed
+  thumbnail programs, and pick the app's language.
 - **thumbnails**: the badge (style, corner, size), files without a picture, where in a video the
   frame is taken, blank frames, cover art, gentle mode and the time limit. a live preview shows a
   sample video and a sample song without a cover, and any file you pick. after a change, a bar
@@ -293,6 +296,7 @@ a command line tool for everything the app does, also used by the installer.
 | `status` | shows which thumbnail handler windows uses for each supported file type |
 | `repair [--user]` | removes thumbnail entries whose program is gone (one whose folder was deleted without uninstalling it) |
 | `refresh <folder> [--recursive]` | remakes the thumbnails windows keeps for a folder's files, without restarting explorer |
+| `prepare <folder> [--recursive]` | makes the thumbnails windows does not have yet for a folder's files, so explorer shows them at once |
 | `settings` | shows your settings, each with a plain-words description |
 | `set <name> <value>` | changes one of your settings |
 | `thumb <file> <out.png> [--size n]` | makes a thumbnail with the engine directly |

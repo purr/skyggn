@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Skyggn.Services;
@@ -30,6 +31,11 @@ public sealed record Format(string Extension, Category Category, bool Recommende
 
 public sealed record Setting(string Name, uint Default, uint Min, uint Max);
 
+// what Engine.PrepareFolder did with the files it found (skyggn_prepare_result); Stopped when the
+// progress callback asked it to stop
+public sealed record Preparation(uint Made, uint Kept, uint WithoutPicture, uint OnlineOnly, uint UnreadableFolders,
+    bool Stopped);
+
 public sealed class EngineException(string action, int hresult)
     : Exception(Text.Format("ActionFailed", action, Marshal.GetExceptionForHR(hresult)?.Message ?? $"0x{hresult:X8}"))
 {
@@ -60,6 +66,19 @@ public static unsafe partial class Engine
         public Category Category;
         public int Recommended;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct NativePreparation
+    {
+        public uint Made;
+        public uint Kept;
+        public uint WithoutPicture;
+        public uint OnlineOnly;
+        public uint UnreadableFolders;
+    }
+
+    // HRESULT_FROM_WIN32(ERROR_CANCELLED): skyggn_prepare_folder stopped because the callback said so
+    private const int Cancelled = unchecked((int)0x800704C7);
 
     [StructLayout(LayoutKind.Sequential)]
     private struct NativeSetting
@@ -139,6 +158,45 @@ public static unsafe partial class Engine
 
     // whether skyggn reads the details windows keeps for its own handler (mkv, webm)
     public static bool SystemDetailsTaken => skyggn_system_details_taken() != 0;
+
+    // has windows make the thumbnails of a folder's files it does not have yet (skyggn_prepare_folder).
+    // `progress` gets done, total and the file just done, on the engine's threads, one at a time; it
+    // returns false to stop. blocks until done, so it runs off the ui thread.
+    public static Preparation PrepareFolder(string folder, bool recursive, Func<uint, uint, string, bool> progress)
+    {
+        var handle = GCHandle.Alloc(progress);
+        try
+        {
+            var hresult = skyggn_prepare_folder(folder, recursive ? 1 : 0, 0, &OnPrepareProgress,
+                GCHandle.ToIntPtr(handle), out NativePreparation result);
+            if (hresult != Cancelled)
+            {
+                Check(hresult, Text.Format("ActionPrepare", folder));
+            }
+            return new Preparation(result.Made, result.Kept, result.WithoutPicture, result.OnlineOnly,
+                result.UnreadableFolders, hresult == Cancelled);
+        }
+        finally
+        {
+            handle.Free();
+        }
+    }
+
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]
+    private static int OnPrepareProgress(IntPtr context, uint done, uint total, char* file)
+    {
+        try
+        {
+            var progress = (Func<uint, uint, string, bool>)GCHandle.FromIntPtr(context).Target!;
+            return progress(done, total, new string(file)) ? 1 : 0;
+        }
+        catch (Exception)
+        {
+            // an exception must not cross into the engine's threads; stopping is the safe answer,
+            // and the page shows that it stopped
+            return 0;
+        }
+    }
 
     private static void Check(int hresult, string action)
     {
@@ -228,6 +286,11 @@ public static unsafe partial class Engine
 
     [LibraryImport(Library)]
     private static partial int skyggn_system_details_taken();
+
+    [LibraryImport(Library, StringMarshalling = StringMarshalling.Utf16)]
+    private static partial int skyggn_prepare_folder(string folder, int recursive, int force,
+        delegate* unmanaged[Stdcall]<IntPtr, uint, uint, char*, int> progress, IntPtr context,
+        out NativePreparation result);
 
     [LibraryImport(Library)]
     private static partial void skyggn_notify_shell();

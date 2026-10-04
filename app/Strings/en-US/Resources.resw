@@ -418,4 +418,61 @@ The details are in {1}.</value>
   <data name="SystemDetailsCard.Description" xml:space="preserve">
     <value>Windows keeps the details of MKV and WebM files for its own handler, which shows little more than the length. Turn on to show skyggn's instead: frame size, codecs, audio and subtitle tracks, chapters. This sets aside entries Windows protects; turning it off puts them back, and a Windows update may put them back too.</value>
   </data>
+  <data name="PrepareCard.Header" xml:space="preserve">
+    <value>Make thumbnails now</value>
+  </data>
+  <data name="PrepareCard.Description" xml:space="preserve">
+    <value>Make the thumbnails of a folder's files ahead of time, so File Explorer shows them at once. Files that already have one are left as they are.</value>
+  </data>
+  <data name="PrepareFolderCard.Header" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="PrepareFolderBox.PlaceholderText" xml:space="preserve">
+    <value>Paste a folder's path</value>
+  </data>
+  <data name="PrepareBrowseButton.Content" xml:space="preserve">
+    <value>Browse…</value>
+  </data>
+  <data name="PrepareSubfoldersCard.Header" xml:space="preserve">
+    <value>Include subfolders</value>
+  </data>
+  <data name="PrepareStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="PrepareStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="PrepareListing" xml:space="preserve">
+    <value>Looking for files…</value>
+  </data>
+  <data name="PrepareFound" xml:space="preserve">
+    <value>Files found: {0}</value>
+  </data>
+  <data name="PrepareProgress" xml:space="preserve">
+    <value>{0} of {1}: {2}</value>
+  </data>
+  <data name="PrepareDone" xml:space="preserve">
+    <value>Done. Made: {0}. Already there: {1}.</value>
+  </data>
+  <data name="PrepareStopped" xml:space="preserve">
+    <value>Stopped. Made: {0}. Already there: {1}.</value>
+  </data>
+  <data name="PrepareNoPicture" xml:space="preserve">
+    <value>No picture, or could not be read: {0}.</value>
+  </data>
+  <data name="PrepareOnlineOnly" xml:space="preserve">
+    <value>Online-only cloud files, left alone so nothing downloads: {0}.</value>
+  </data>
+  <data name="PrepareUnreadable" xml:space="preserve">
+    <value>Subfolders that could not be opened: {0}.</value>
+  </data>
+  <data name="PrepareNoFolder" xml:space="preserve">
+    <value>Paste or choose a folder first.</value>
+  </data>
+  <data name="PrepareMissing" xml:space="preserve">
+    <value>{0} is not a folder.</value>
+  </data>
+  <data name="ActionPrepare" xml:space="preserve">
+    <value>making the thumbnails of {0}</value>
+  </data>
 </root>

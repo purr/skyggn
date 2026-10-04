@@ -23,6 +23,7 @@ add_library(skyggn SHARED
     src/module.cpp
     src/package.cpp
     src/pdf.cpp
+    src/prepare.cpp
     src/properties.cpp
     src/provider.cpp
     src/raw.cpp
@@ -43,7 +44,7 @@ target_include_directories(skyggn
     PUBLIC include
     PRIVATE src assets ${generated})
 target_compile_definitions(skyggn PRIVATE SKYGGN_BUILDING)
-target_link_libraries(skyggn PRIVATE ffmpeg wil libraw libarchive xmllite propsys shcore delayimp runtimeobject shlwapi d2d1 dwrite windowscodecs dxguid bcrypt)
+target_link_libraries(skyggn PRIVATE ffmpeg wil libraw libarchive xmllite propsys shcore delayimp runtimeobject shlwapi pathcch d2d1 dwrite windowscodecs dxguid bcrypt)
 
 foreach(dll IN LISTS SKYGGN_FFMPEG_DELAYLOAD_DLLS)
     target_link_options(skyggn PRIVATE /DELAYLOAD:${dll})

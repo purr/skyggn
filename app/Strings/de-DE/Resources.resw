@@ -101,7 +101,7 @@
     <value>Miniaturansichten erneuern?</value>
   </data>
   <data name="RefreshDialogContent" xml:space="preserve">
-    <value>Der Datei-Explorer schließt sich kurz und öffnet sich mit seinen Fenstern wieder. Jede Miniaturansicht, auch die von Fotos, wird beim Durchsuchen neu erstellt.</value>
+    <value>Der Datei-Explorer schließt sich kurz und öffnet sich mit seinen Fenstern wieder. Jede Miniaturansicht und jedes Dateisymbol, auch die von Fotos, wird beim Durchsuchen neu erstellt.</value>
   </data>
   <data name="RefreshDialogRefresh" xml:space="preserve">
     <value>Erneuern</value>
@@ -383,7 +383,7 @@ Die Einzelheiten stehen in {1}.</value>
     <value>Neustart des Datei-Explorers</value>
   </data>
   <data name="CacheInUse" xml:space="preserve">
-    <value>Diese Miniaturansicht-Cachedateien waren noch in Benutzung: {0}</value>
+    <value>Diese Cachedateien waren noch in Benutzung: {0}</value>
   </data>
   <data name="CacheList" xml:space="preserve">
     <value>Suchen der Programme, die den Miniaturansicht-Cache verwenden</value>

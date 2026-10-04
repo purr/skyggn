@@ -101,7 +101,7 @@
     <value>Refresh thumbnails?</value>
   </data>
   <data name="RefreshDialogContent" xml:space="preserve">
-    <value>File Explorer closes for a moment and opens again with its windows. Every thumbnail, photos included, is made again as you browse.</value>
+    <value>File Explorer closes for a moment and opens again with its windows. Every thumbnail and file icon, photos included, is made again as you browse.</value>
   </data>
   <data name="RefreshDialogRefresh" xml:space="preserve">
     <value>Refresh</value>
@@ -383,7 +383,7 @@ The details are in {1}.</value>
     <value>starting File Explorer again</value>
   </data>
   <data name="CacheInUse" xml:space="preserve">
-    <value>these thumbnail cache files were still in use: {0}</value>
+    <value>these cache files were still in use: {0}</value>
   </data>
   <data name="CacheList" xml:space="preserve">
     <value>finding the programs that use the thumbnail cache</value>

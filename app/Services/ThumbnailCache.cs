@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -5,7 +6,9 @@ namespace Skyggn.Services;
 
 // windows keeps every thumbnail it made in thumbcache_*.db files, held open by file explorer. to
 // clear them, the restart manager closes explorer cleanly, the files are deleted, and the restart
-// manager starts explorer again with its windows.
+// manager starts explorer again with its windows. the icons windows drew for file types
+// (iconcache_*.db) go too: it draws an app's file type icons through the thumbnail handlers, so they
+// can carry a look skyggn gave them.
 public static partial class ThumbnailCache
 {
     private const int CchRmSessionKey = 32;
@@ -26,6 +29,15 @@ public static partial class ThumbnailCache
         public uint AppStatus;
         public uint TsSessionId;
         public int Restartable;
+    }
+
+    // RM_UNIQUE_PROCESS: a process id and its start time, which together name one process
+    [StructLayout(LayoutKind.Sequential)]
+    private struct RmUniqueProcess
+    {
+        public uint ProcessId;
+        public uint StartTimeLow;
+        public uint StartTimeHigh;
     }
 
     // one clear at a time: a second one, from another page or a second click, would close the
@@ -63,6 +75,10 @@ public static partial class ThumbnailCache
         var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "Microsoft", "Windows", "Explorer");
         var files = Directory.GetFiles(folder, "thumbcache_*.db");
+        // not registered with the restart manager: programs that show file icons (a browser, a
+        // screenshot tool) keep these open, and would have to close. they let the files be deleted,
+        // which takes effect once they let go of them.
+        var icons = Directory.GetFiles(folder, "iconcache_*.db");
         if (files.Length == 0)
         {
             return;
@@ -73,12 +89,14 @@ public static partial class ThumbnailCache
         try
         {
             var names = files.Select(Marshal.StringToHGlobalUni).ToArray();
+            var explorers = Explorers();
             try
             {
                 fixed (IntPtr* list = names)
+                fixed (RmUniqueProcess* applications = explorers)
                 {
-                    Check(RmRegisterResources(session, (uint)names.Length, list, 0, null, 0, null),
-                        "CacheRegister");
+                    Check(RmRegisterResources(session, (uint)names.Length, list, (uint)explorers.Length, applications,
+                        0, null), "CacheRegister");
                 }
             }
             finally
@@ -105,7 +123,7 @@ public static partial class ThumbnailCache
             {
                 if (shutdown == 0)
                 {
-                    foreach (var file in files)
+                    foreach (var file in files.Concat(icons))
                     {
                         try
                         {
@@ -139,6 +157,40 @@ public static partial class ThumbnailCache
         {
             RmEndSession(session);
         }
+    }
+
+    // every file explorer of this session, named to the restart manager so it closes and restarts
+    // them whether or not they have a cache file open at that moment: one that had none open went on
+    // running, and drew the thumbnails and icons it keeps in memory again after the refresh
+    private static RmUniqueProcess[] Explorers()
+    {
+        using var current = Process.GetCurrentProcess();
+        var found = new List<RmUniqueProcess>();
+        foreach (var explorer in Process.GetProcessesByName("explorer"))
+        {
+            using (explorer)
+            {
+                try
+                {
+                    if (explorer.SessionId == current.SessionId &&
+                        GetProcessTimes(explorer.Handle, out long created, out _, out _, out _))
+                    {
+                        found.Add(new RmUniqueProcess
+                        {
+                            ProcessId = (uint)explorer.Id,
+                            StartTimeLow = (uint)created,
+                            StartTimeHigh = (uint)(created >> 32),
+                        });
+                    }
+                }
+                catch (Exception error) when (error is Win32Exception or InvalidOperationException)
+                {
+                    // it ended meanwhile, or this account may not open it (one run as administrator):
+                    // the restart manager still closes it if it has a cache file open
+                }
+            }
+        }
+        return found.ToArray();
     }
 
     // the names of the programs other than file explorer that have the registered files open
@@ -207,7 +259,12 @@ public static partial class ThumbnailCache
 
     [LibraryImport("rstrtmgr.dll")]
     private static unsafe partial int RmRegisterResources(uint session, uint fileCount, IntPtr* files,
-        uint applicationCount, void* applications, uint serviceCount, IntPtr* services);
+        uint applicationCount, RmUniqueProcess* applications, uint serviceCount, IntPtr* services);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool GetProcessTimes(IntPtr process, out long creation, out long exit, out long kernel,
+        out long user);
 
     [LibraryImport("rstrtmgr.dll")]
     private static unsafe partial int RmGetList(uint session, out uint needed, ref uint count, RmProcessInfo* affected,

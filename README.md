@@ -47,19 +47,20 @@ thumbnails. for the formats windows describes poorly, it fills in explorer's det
 ## speed
 
 time per thumbnail, measured the way explorer asks for them (through windows' thumbnail helper
-process), at 256 px with gentle mode on, on test files made with ffmpeg. the pc was busy with other
-work at full cpu load the whole time, and gentle mode lets that work go first, so these are slow
-cases; the fastest of the 8 runs is closer to an idle pc.
+process), on test files made with ffmpeg, with gentle mode on, while the pc ran other work at 65 to
+85 % cpu load. the size is 1280 px: on the test pc, that is what windows asked for when it filled
+its cache for a large icons view, and it makes the smaller sizes from it. median and fastest of 8
+runs:
 
 | file | median | fastest |
 |---|---|---|
-| full-hd video, mkv (h.264) | 282 ms | 85 ms |
-| full-hd video, mp4 (h.264) | 158 ms | 73 ms |
-| 4k video, mkv (hevc) | 291 ms | 173 ms |
-| 4k hdr video, mkv (hevc 10-bit) | 321 ms | 189 ms |
-| 12-megapixel photo, jpeg | 216 ms | 92 ms |
-| song with cover art, mp3 | 82 ms | 69 ms |
-| song without cover art, mp3 (tile) | 172 ms | 100 ms |
+| full-hd video, mkv (h.264) | 150 ms | 143 ms |
+| full-hd video, mp4 (h.264) | 164 ms | 133 ms |
+| 4k video, mkv (hevc) | 267 ms | 208 ms |
+| 4k hdr video, mkv (hevc 10-bit) | 296 ms | 247 ms |
+| 12-megapixel photo, jpeg | 242 ms | 166 ms |
+| song with cover art, mp3 | 172 ms | 135 ms |
+| song without cover art, mp3 (tile) | 157 ms | 135 ms |
 
 windows makes thumbnails one at a time, for every thumbnail program alike, and keeps them: each
 file costs this once.
@@ -93,12 +94,12 @@ preview the camera embedded.
 previous thumbnails back when it is turned off or uninstalled.
 
 **will it slow down my pc or games?** no service and no background process: windows runs skyggn
-only while it makes a thumbnail. gentle mode (on by default) runs it below normal priority, on one
-thread, so games and other programs go first.
+only while it makes a thumbnail. gentle mode (on by default) makes each one on a single processor
+core, so games and other programs keep all the others.
 
-**thumbnails still have the old look after a change or an update.** windows keeps the thumbnails
-it made. click **refresh thumbnails** in the skyggn app; file explorer closes for a moment and
-makes them again as you browse.
+**thumbnails or file icons still have the old look after a change or an update.** windows keeps
+the thumbnails and icons it made. click **refresh thumbnails** in the skyggn app; file explorer
+closes for a moment and makes them again as you browse.
 
 ## more
 
@@ -139,7 +140,9 @@ off, since they would land in that room; uninstalling puts them back.
 | corner | bottom right (default), bottom left, top right, top left |
 | size | 16 to 32 % of the thumbnail (24 by default), the same on every file |
 
-thumbnails smaller than 48 px get no badge; the file type shows from 128 px up.
+thumbnails smaller than 48 px get no badge; the file type shows from 128 px up. pictures named the
+way windows picks an app's icons (`name.targetsize-256.png`, `name.scale-200.png`) get no badge
+and no tile: windows draws the icons of the file types an app opens from them.
 
 a file without a picture gets a tile with its kind's symbol and its file type. its colours come
 from the album for songs, so an album matches, and from all of the file's contents for everything
@@ -231,10 +234,9 @@ a damaged file cannot crash or hang explorer, and ffmpeg never loads into it.
   when it is big enough, jpegs decode at a reduced size where possible, and camera raws use the
   preview the camera embedded. only a raw with no preview, or one too small, is developed from
   its sensor data, at half size.
-- **gentle mode** (on by default) lowers cpu priority and uses one thread, so games and other
-  programs stay smooth while a folder of videos gets its thumbnails. disk priority stays normal:
-  a thumbnail reads little, and windows' lowest disk priority made thumbnails wait seconds
-  whenever anything else used the disk.
+- **gentle mode** (on by default) makes each thumbnail on one thread, so games and other programs
+  keep the other cores while a folder of videos gets its thumbnails. it keeps normal priority: a
+  lowered one made thumbnails wait seconds behind any busy program, such as a compile.
 - **a time limit per file** (5 seconds by default). past it, the file gets the no-picture tile;
   nothing can hang.
 
@@ -310,7 +312,7 @@ per user; each applies to the next thumbnail made.
 | `FramePosition` | 20 | 0-95 | where in the video the frame is taken, in percent |
 | `PreferCoverArt` | 1 | 0-1 | use a video's own cover over a frame |
 | `SkipBlackFrames` | 1 | 0-1 | look later when the frame is black, white or flat |
-| `LowImpact` | 1 | 0-1 | gentle mode: lower cpu priority, one thread |
+| `LowImpact` | 1 | 0-1 | gentle mode: one thread per thumbnail |
 | `TimeLimitMs` | 5000 | 500-30000 | time allowed per file, in milliseconds |
 | `BadgeStyle` | 1 | 0-3 | 0 none, 1 frosted, 2 coloured by kind, 3 with the file type |
 | `BadgeCorner` | 0 | 0-3 | 0 bottom right, 1 bottom left, 2 top right, 3 top left |

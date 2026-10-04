@@ -703,6 +703,32 @@ HRESULT camera_raw_image(IStream* stream, UINT size, bool low_impact, const dead
 HRESULT picture_of(IStream* stream, UINT size, const settings& options, const deadline& limit,
                    const std::wstring& extension, const format_entry* known, image& picture, std::wstring& album);
 
+// windows draws the icon of a file type an app opens from the app's own picture of it (a store
+// app's "Assets\PhotosLogoExtensions.targetsize-256.png"), made through the thumbnail handler of
+// the picture's type. with skyggn's badge on those, every photo and video icon in explorer carried
+// one, kept in windows' icon cache. such pictures are named with the qualifiers windows picks them
+// by ("name.targetsize-256_altform-unplated.png", "name.scale-200.png"), which photos never are.
+bool is_app_icon_picture(std::wstring_view file_name) {
+    const std::wstring_view base = file_name.substr(0, file_name.rfind(L'.'));
+    const size_t dot = base.rfind(L'.');
+    if (dot == std::wstring_view::npos) {
+        return false;
+    }
+    for (std::wstring_view rest = base.substr(dot + 1); !rest.empty();) {
+        const std::wstring_view qualifier = rest.substr(0, rest.find(L'_'));
+        rest.remove_prefix(std::min(rest.size(), qualifier.size() + 1));
+        for (const std::wstring_view kind : {std::wstring_view(L"targetsize-"), std::wstring_view(L"scale-")}) {
+            if (qualifier.size() > kind.size() &&
+                CompareStringOrdinal(qualifier.data(), static_cast<int>(kind.size()), kind.data(),
+                                     static_cast<int>(kind.size()), TRUE) == CSTR_EQUAL &&
+                qualifier[kind.size()] >= L'0' && qualifier[kind.size()] <= L'9') {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 // an adobe design file's picture: the best of the previews it carries that decodes (design.h).
 // without one, an illustrator file with pdf content gets its page drawn. the previews come first
 // because an illustrator file saved without pdf content has a page that only says so.
@@ -806,30 +832,28 @@ HRESULT picture_of(IStream* stream, UINT size, const settings& options, const de
 
 }  // namespace
 
-HRESULT make_thumbnail_image(IStream* stream, UINT size, const settings& options, image& picture,
+HRESULT make_thumbnail_image(IStream* stream, UINT size, const settings& chosen, image& picture,
                              skyggn_damage* damage) {
     RETURN_HR_IF(E_INVALIDARG, size == 0);
     RETURN_IF_FAILED(load_ffmpeg());
 
-    // gentle mode lowers only this thread's cpu priority while it works, and decodes on this thread
-    // alone: games and other programs at normal priority go first, and an idle core makes the
-    // thumbnail at full speed. windows' background mode (THREAD_MODE_BACKGROUND_BEGIN) also lowers
-    // disk and memory priority, which made thumbnails take up to 13 s instead of 50 ms whenever
-    // anything else used the disk or the cpu, as explorer itself does while a folder opens. a thread
-    // windows already runs lower keeps its priority.
-    const int previous_priority = GetThreadPriority(GetCurrentThread());
-    const bool lowered = options.low_impact && previous_priority != THREAD_PRIORITY_ERROR_RETURN &&
-                         previous_priority > THREAD_PRIORITY_BELOW_NORMAL &&
-                         SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
-    auto restore_priority = wil::scope_exit([&] {
-        if (lowered) {
-            SetThreadPriority(GetCurrentThread(), previous_priority);
-        }
-    });
-
-    const deadline limit{std::chrono::steady_clock::now() + std::chrono::milliseconds(options.time_limit_ms)};
+    // gentle mode decodes on one thread (open_decoder), at the priority windows gives the call. a
+    // lowered priority made thumbnails wait behind any busy program: during a compile, below normal
+    // took up to 2.8 s instead of 35 ms, and windows' background mode (which also lowers disk and
+    // memory priority) up to 13 s. one thread for tens of milliseconds leaves games the other cores.
+    const deadline limit{std::chrono::steady_clock::now() + std::chrono::milliseconds(chosen.time_limit_ms)};
     const std::wstring name = stream_name(stream);
     const std::wstring extension = PathFindExtensionW(name.c_str());
+    // an app's own picture of a file type is drawn as it is: no badge, no tile (is_app_icon_picture).
+    // a damage check (skyggn_check) keeps the tile it asked for: with it, a missing picture is not a
+    // failure, so any failure left is real, and the check's picture is thrown away anyway.
+    settings options = chosen;
+    if (is_app_icon_picture(PathFindFileNameW(name.c_str()))) {
+        options.badge.style = SKYGGN_BADGE_NONE;
+        if (!damage) {
+            options.placeholder = SKYGGN_PLACEHOLDER_NONE;
+        }
+    }
     const format_entry* known = find_format(extension);
     // a file type skyggn does not list (a handler registered by hand) counts as video
     const skyggn_category category = known ? known->format.category : SKYGGN_CATEGORY_VIDEO;

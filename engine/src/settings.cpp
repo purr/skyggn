@@ -35,8 +35,8 @@ constexpr skyggn_setting kSettings[] = {
      L"in the video for a better one.",
      1, 0, 1},
     {L"LowImpact",
-     L"Make thumbnails gently in the background, so games and other programs never stutter. New thumbnails may "
-     L"take a moment longer to appear.",
+     L"Make each thumbnail on one processor core, so games and other programs keep all the others. Thumbnails "
+     L"of very large videos and photos take a moment longer.",
      1, 0, 1},
     {L"TimeLimitMs",
      L"The longest time spent on one file. A file that takes longer is shown as if it had no picture, so "
@@ -66,8 +66,8 @@ constexpr const wchar_t* kGermanDescriptions[] = {
     L"aus dem Video gezeigt.",
     L"Ist das gewählte Bild schwarz, weiß oder leer, etwa bei einer Einblendung oder einem Titel auf Schwarz, "
     L"wird etwas später im Video nach einem besseren gesucht.",
-    L"Miniaturansichten schonend im Hintergrund erstellen, damit Spiele und andere Programme nie ruckeln. Neue "
-    L"Miniaturansichten erscheinen dafür manchmal etwas später.",
+    L"Jede Miniaturansicht auf einem einzigen Prozessorkern erstellen, damit Spielen und anderen Programmen alle "
+    L"übrigen Kerne bleiben. Bei sehr großen Videos und Fotos dauert das Erstellen dafür etwas länger.",
     L"Die längste Zeit für eine Datei. Braucht eine Datei länger, wird sie wie eine Datei ohne Bild angezeigt, "
     L"damit nichts hängen bleibt.",
     L"Das kleine Zeichen in der Ecke jeder Miniaturansicht, das zeigt, um welche Art von Datei es sich handelt.",

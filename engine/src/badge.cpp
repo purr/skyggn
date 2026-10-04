@@ -261,7 +261,10 @@ image with_room(const image& picture, int room) {
     return canvas;
 }
 
-// three box blur passes approximate a gaussian blur: the frosted glass behind a badge
+// three box blur passes approximate a gaussian blur: the frosted glass behind a badge. each pass
+// slides its window along the line, adding the pixel that comes in and taking off the one that
+// leaves, so its cost does not grow with the radius. summing the whole window for every pixel took
+// half a second for the badge of a 1280 px thumbnail, the size windows asks for to fill its cache.
 void blur(std::vector<uint32_t>& pixels, int width, int height, int radius) {
     std::vector<uint32_t> scratch(pixels.size());
     const auto pass = [&](const std::vector<uint32_t>& in, std::vector<uint32_t>& out, bool horizontal) {
@@ -271,15 +274,22 @@ void blur(std::vector<uint32_t>& pixels, int width, int height, int radius) {
             const auto at = [&](int i) {
                 return horizontal ? static_cast<size_t>(line) * width + i : static_cast<size_t>(i) * width + line;
             };
+            uint32_t sum[4] = {};
+            const auto take = [&](int i, bool in_window) {
+                const uint32_t pixel = in[at(i)];
+                for (int c = 0; c < 4; ++c) {
+                    const uint32_t value = (pixel >> (c * 8)) & 0xff;
+                    sum[c] = in_window ? sum[c] + value : sum[c] - value;
+                }
+            };
+            int first = 0;  // the window, [first, last], of the pixel before
+            int last = -1;
             for (int i = 0; i < length; ++i) {
-                uint32_t sum[4] = {};
-                const int first = std::max(0, i - radius);
-                const int last = std::min(length - 1, i + radius);
-                for (int k = first; k <= last; ++k) {
-                    const uint32_t pixel = in[at(k)];
-                    for (int c = 0; c < 4; ++c) {
-                        sum[c] += (pixel >> (c * 8)) & 0xff;
-                    }
+                for (; last < std::min(length - 1, i + radius); ++last) {
+                    take(last + 1, true);
+                }
+                for (; first < std::max(0, i - radius); ++first) {
+                    take(first, false);
                 }
                 const uint32_t count = static_cast<uint32_t>(last - first + 1);
                 uint32_t result = 0;

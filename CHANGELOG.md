@@ -3,6 +3,23 @@
 what changed in each release of skyggn. a release's section here is also its text on the
 releases page.
 
+## [0.1.1]
+
+- thumbnails come several times faster. windows asks for them at 1280 px to fill its cache, and
+  the frosted glass behind the badge took half a second at that size; it now takes a few
+  milliseconds, with the very same look. making a full-hd video's thumbnail took about 545 ms at that
+  size, and now takes about 75 ms.
+- gentle mode keeps normal priority and only makes each thumbnail on one thread. with a lowered
+  priority, thumbnails waited seconds behind any busy program, such as a compile.
+- installing an update no longer stops with "unable to close all applications" (or, silently,
+  gives up) while windows' thumbnail helper still has skyggn loaded: the loaded files are moved
+  aside and removed when windows next starts.
+- file icons in explorer (photos, videos and other types an app opens) no longer carry skyggn's
+  badge. windows draws those icons from the apps' own pictures, named like
+  `name.targetsize-256.png`, through the thumbnail handlers, and skyggn put its badge on them too.
+  click **refresh thumbnails** in the app once: it now clears windows' icon cache as well, and
+  always restarts file explorer, so the old icons go.
+
 ## [0.1.0]
 
 the first release of skyggn, an open-source alternative to icaros.

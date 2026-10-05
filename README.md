@@ -10,6 +10,8 @@ types get real thumbnails and details in windows 10 and 11.
 
 [![download the installer](https://img.shields.io/badge/download-installer-6d5ce8?style=for-the-badge)](../../releases/latest)
 
+[purr.github.io/skyggn](https://purr.github.io/skyggn/)
+
 ![windows 10 and 11](https://img.shields.io/badge/windows-10%20%7C%2011-0078d4?style=flat-square)
 ![x64](https://img.shields.io/badge/x64-555?style=flat-square)
 ![179 file types](https://img.shields.io/badge/file%20types-179-8764b8?style=flat-square)
@@ -382,6 +384,7 @@ its sha-256 checksum and that version's changelog as the release text.
 | `cmake/` | pinned third-party downloads |
 | `scripts/` | redraw the icon and the showcase picture |
 | `.github/workflows/` | the build and release workflow |
+| `docs/` | the page at [purr.github.io/skyggn](https://purr.github.io/skyggn/), served by github pages from this folder |
 
 </details>
 

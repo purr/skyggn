@@ -83,17 +83,17 @@ to remove it: settings > apps > installed apps > skyggn > uninstall.
 
 ## questions
 
-**mkv or webm thumbnails are not showing in windows 11 file explorer.** windows has no codec for
+**why are mkv or webm thumbnails not showing in windows 11 file explorer?** windows has no codec for
 them. install skyggn and they get a frame from the video, or the cover the file carries.
 
-**flac, ogg or mka cover art does not show in explorer.** skyggn shows the album cover embedded in
+**why does flac, ogg or mka cover art not show in explorer?** skyggn shows the album cover embedded in
 the file, for mp3, flac, ogg, opus, m4a, mka, wma, ape and more; a song without one gets a tile.
 
-**heic, avif or camera raw photos show only icons.** skyggn shows them without extra codecs from the
+**why do heic, avif or camera raw photos show only icons?** skyggn shows them without extra codecs from the
 microsoft store: heic and avif through ffmpeg, raws (cr2, cr3, nef, arw, raf, dng…) from the
 preview the camera embedded.
 
-**is it an alternative to icaros?** yes. icaros is free but closed source; skyggn is open source
+**is skyggn an alternative to icaros?** yes. icaros is free but closed source; skyggn is open source
 (gpl-3.0), with a settings app in windows 11's own style, and it gives every file type its
 previous thumbnails back when it is turned off or uninstalled.
 
@@ -101,7 +101,7 @@ previous thumbnails back when it is turned off or uninstalled.
 only while it makes a thumbnail. gentle mode (on by default) makes each one on a single processor
 core, so games and other programs keep all the others.
 
-**thumbnails or file icons still have the old look after a change or an update.** windows keeps
+**why do thumbnails or file icons still have the old look after a change or an update?** windows keeps
 the thumbnails and icons it made. click **refresh thumbnails** in the skyggn app; file explorer
 closes for a moment and makes them again as you browse.
 
